@@ -1,0 +1,35 @@
+Bootstrap: docker
+From: continuumio/miniconda3
+Stage: spython-base
+
+%files
+environment.yml .
+%post
+
+cd /app
+
+apt update && apt install -y build-essential && apt-get install -y manpages-dev
+
+
+# Create the environment:
+conda env create -f environment.yml
+
+# Make RUN commands use the new environment:
+SHELL ["conda", "run", "-n", "topofit", "/bin/bash", "-c"]
+
+# Demonstrate the environment is activated:
+echo "Make sure torch is installed:"
+python -c "import torch"
+pip install torch-scatter -f https://data.pyg.org/whl/torch-1.11.0+cu113.html
+
+# The code to run when container is started:
+#COPY run.py .
+#ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "myenv", "python", "run.py"]
+
+
+%runscript
+cd /app
+exec /bin/bash "$@"
+%startscript
+cd /app
+exec /bin/bash "$@"
