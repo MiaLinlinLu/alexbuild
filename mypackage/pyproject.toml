@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "mypackage"
+name = "alex-dl-brain"
 version = "0.1.0"
 description = ""
 authors = ["Alex <afedorov2@gsu.edu>", "Linlin Lu <pku600gt@gmail.com>"]
