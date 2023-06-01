@@ -18,7 +18,6 @@ import torchvision.models as models
 
 import numpy as np
 
-import runcontainer
 
 try:
     from nvidia.dali.plugin.pytorch import DALIClassificationIterator, LastBatchPolicy
@@ -236,9 +235,6 @@ def create_dali_pipeline(
 
 
 def main():
-
-    runcontainer.run_singularity_container()
-
     global best_prec1, args
     best_prec1 = 0
     args = parse()
